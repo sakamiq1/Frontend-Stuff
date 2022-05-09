@@ -1,0 +1,102 @@
+#banner-div {
+  background-image: url("/public/Pictures/sample2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 120px 0px;
+  color: red;
+  font-weight: 700;
+  font-size: 15px;
+  position: relative;
+}
+
+#banner-div #left-sample-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#banner-div #right-sample-img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.card-div {
+  display: flex;
+  justify-content: center;
+}
+
+#greeting-tag {
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.545;
+  font-size: 55px;
+}
+
+#tool-list-div {
+  margin: 50px auto auto auto;
+}
+
+.tool-item-card {
+  border-radius: 30px;
+}
+
+.card-content-div{
+    text-align: left;
+}
+
+.card-content-div .title {
+  text-transform: capitalize;
+  font-weight: 700;
+  color: #02126a;
+  line-height: 1.5;
+  font-size: 20px;
+}
+
+.card-content-div .title:hover {
+  color: #fc7418;
+}
+
+.card-content-div .title a {
+  color: inherit;
+}
+
+.card-content-div button {
+  border: 0px;
+  border-radius: 5px;
+}
+
+.card-content-div .detail-button {
+  background: linear-gradient(
+    to left,
+    #fc7318,
+    #fe8415,
+    #fe9515,
+    #fea51a,
+    #feb423
+  );
+  color: #fff;
+}
+
+.card-content-div .detail-button:hover {
+    background: linear-gradient(
+      to left,
+      #fc7318,
+      #fe8415,
+      #fe9515,
+      #fea51a,
+      #feb423
+    );
+    color: #fff;
+  }
+
+.card-content-div .buy-button {
+  background-color: #32b618;
+  color: #fff;
+  left: 10px;
+}
+
+.card-content-div .buy-button:hover {
+    color: #000;
+    background-color: #51c13b;
+}
