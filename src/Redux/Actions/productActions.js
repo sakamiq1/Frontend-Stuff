@@ -20,3 +20,17 @@ export const getToolDetails = (tool) => {
     payload: tool,
   };
 };
+
+export const createTool = (tool) => {
+  return{
+    type: ActionType.CREATE_TOOL,
+    payload: tool
+  }
+}
+
+export const deleteTool = (id) => {
+  return{
+    type: ActionType.DELETE_TOOL,
+    payload: id
+  }
+}

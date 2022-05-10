@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const loadListTool = async () => {
     await listToolServices.list().then((res) => {
-      dispatch(getListTool(res.data));
+      dispatch(getListTool(res.results));
     });
   };
 

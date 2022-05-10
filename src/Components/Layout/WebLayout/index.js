@@ -31,10 +31,13 @@ const DefaultLayout = () => {
           <Content>
             <Routes>
               <Route path="/" exact element={<HomePage />} />
-              <Route path="/tool">
-                <Route path=":toolId" exact element={<Product />} />
-              </Route>
-              <Route path="/admin-management" exact element={<AdminManagePage />} />
+              <Route path="/tool" element={<HomePage />} />
+              <Route path="/tool/:toolId" exact element={<Product />} />
+              <Route
+                path="/admin-management"
+                exact
+                element={<AdminManagePage />}
+              />
             </Routes>
           </Content>
         </Layout>
