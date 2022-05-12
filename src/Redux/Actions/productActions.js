@@ -28,9 +28,3 @@ export const createTool = (tool) => {
   }
 }
 
-export const deleteTool = (id) => {
-  return{
-    type: ActionType.DELETE_TOOL,
-    payload: id
-  }
-}

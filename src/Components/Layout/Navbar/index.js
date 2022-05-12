@@ -6,7 +6,7 @@ const items = [
   {
     key: "home",
     label: (
-      <NavLink exact to="/" className="navbar-link">
+      <NavLink exact to="/home" className="navbar-link">
         Trang chủ
       </NavLink>
     ),
@@ -22,7 +22,7 @@ const items = [
   {
     key: "admin-management",
     label: (
-      <NavLink exact to="/admin-management" className="navbar-link">
+      <NavLink exact to="/admin" className="navbar-link">
         Admin
       </NavLink>
     ),

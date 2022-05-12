@@ -1,17 +1,18 @@
 import { Layout } from "antd";
-import HomePage from "../../ClientPages/HomePage/index";
+import ProductPage from "../../ClientPages/ProductPage/index";
 import Product from "../../ClientPages/Product/index";
 import "./index.css";
 import Navbar from "../Navbar/index";
 import { Routes, Route, NavLink } from "react-router-dom";
 import AdminManagePage from "../../AdminPages/AdminManagementPage";
+import HomePage from "../../ClientPages/HomePage";
 
 const { Header, Footer, Content } = Layout;
 
 const DefaultLayout = () => {
   return (
     <>
-      <Layout style={{ minHeight: "100%", textAlign: "center" }}>
+      <Layout style={{ minHeight: "100vh", textAlign: "center" }}>
         <Header
           style={{
             position: "sticky",
@@ -22,7 +23,7 @@ const DefaultLayout = () => {
             backgroundColor: "white",
           }}
         >
-          <NavLink to="/">
+          <NavLink exact to="/home">
             <img src="/Pictures/sample4.png" />
           </NavLink>
           <Navbar />
@@ -30,14 +31,10 @@ const DefaultLayout = () => {
         <Layout>
           <Content>
             <Routes>
-              <Route path="/" exact element={<HomePage />} />
-              <Route path="/tool" element={<HomePage />} />
-              <Route path="/tool/:toolId" exact element={<Product />} />
-              <Route
-                path="/admin-management"
-                exact
-                element={<AdminManagePage />}
-              />
+              <Route path="/*" element={<HomePage />} />
+              <Route path="/tool" element={<ProductPage />} />
+              <Route path="/tool/:toolId" element={<Product />} />
+              <Route path="/admin/*" element={<AdminManagePage />} />
             </Routes>
           </Content>
         </Layout>

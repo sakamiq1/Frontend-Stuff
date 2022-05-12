@@ -12,8 +12,7 @@ export const toolReducer = (state = INIT_STATE, { type, payload }) => {
       return { ...state, ...payload };
     case ActionType.CREATE_TOOL:
       return { ...state, tools: [...state.tools, payload] };
-      case ActionType.DELETE_TOOL:
-        return state
+      
     default:
       return state;
   }

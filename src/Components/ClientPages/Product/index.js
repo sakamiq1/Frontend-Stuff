@@ -10,7 +10,7 @@ const Product = () => {
   const tool = useSelector((state) => state.details);
   const dispatch = useDispatch();
   let param = useParams();
-  
+
   const getDetails = async () => {
     await listToolServices.getToolById(param.toolId).then((res) => {
       dispatch(getToolDetails(res.data));
@@ -22,7 +22,7 @@ const Product = () => {
       getDetails();
     }
   }, [param.toolId]);
-  
+
   return (
     <div id="product-div">
       <h1 id="product-title">{tool.name}</h1>
@@ -33,16 +33,20 @@ const Product = () => {
         </div>
         <div>
           <table>
-            <tr>
-              <th>Phần mềm</th>
-              <th>Thời gian</th>
-              <th>Giá</th>
-            </tr>
-            <tr>
-              <td>{tool.name}</td>
-              <td>1 tháng</td>
-              <td>{tool.price}</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Phần mềm</th>
+                <th>Thời gian</th>
+                <th>Giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{tool.name}</td>
+                <td>1 tháng</td>
+                <td>{tool.price}</td>
+              </tr>
+            </tbody>
           </table>
 
           <p>
