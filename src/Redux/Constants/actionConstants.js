@@ -5,3 +5,7 @@ export const ActionType = {
   EDIT_TOOL_DETAILS: "EDIT_TOOL_DETAILS",
   CREATE_TOOL: "CREATE_TOOL",
 };
+
+export const UserActionType = {
+  LOG_IN: "LOG_IN",
+};

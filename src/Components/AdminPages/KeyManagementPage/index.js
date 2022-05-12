@@ -19,7 +19,7 @@ import {
   editToolDetails,
   createTool,
 } from "../../../Redux/Actions/productActions";
-import listToolServices from "../../../Services/listToolServices";
+import listToolServices from "../../../Services/ToolServices/listToolServices";
 
 const { Content } = Layout;
 

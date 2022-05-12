@@ -1,4 +1,4 @@
-import listToolServices from "../../../Services/listToolServices";
+import listToolServices from "../../../Services/ToolServices/listToolServices";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "antd";

@@ -6,6 +6,7 @@ import Navbar from "../Navbar/index";
 import { Routes, Route, NavLink } from "react-router-dom";
 import AdminManagePage from "../../AdminPages/AdminManagementPage";
 import HomePage from "../../ClientPages/HomePage";
+import UserInformationPage from "../../ClientPages/ClientAccountPage/UserPage";
 
 const { Header, Footer, Content } = Layout;
 
@@ -35,6 +36,7 @@ const DefaultLayout = () => {
               <Route path="/tool" element={<ProductPage />} />
               <Route path="/tool/:toolId" element={<Product />} />
               <Route path="/admin/*" element={<AdminManagePage />} />
+              <Route path="/user/*" element={<UserInformationPage />} />
             </Routes>
           </Content>
         </Layout>
