@@ -39,10 +39,11 @@ const Navbar = () => {
               <Image
                 src="/Pictures/sample4.jpg"
                 style={{ width: 32, height: 32 }}
+                preview="false"
               />
             }
           />
-          {userName}
+          <span style={{marginLeft: "10px"}}>{userName}</span>
         </>
       ) : (
         <NavLink exact to="/login" className="navbar-link">

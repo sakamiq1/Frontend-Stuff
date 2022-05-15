@@ -3,8 +3,6 @@ import userServices from "../../../Services/UserServices/userServices";
 import { useDispatch } from "react-redux";
 import { logInRequest } from "../../../Redux/Actions/userActions";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import jwtDecode from "jwt-decode";
 
 export const LogIn = () => {
   const dispatch = useDispatch();
@@ -14,8 +12,9 @@ export const LogIn = () => {
     userServices.logIn(values).then((res) => {
       dispatch(logInRequest(res));
       if (res.isSuccess) {
-        localStorage.setItem("Token", res.resultItem);
-        localStorage.setItem("User", jwtDecode(res.resultItem).nameid);
+        localStorage.setItem("Token", res.resultItem.value.token);
+        localStorage.setItem("User", res.resultItem.value.username);
+        localStorage.setItem("Role", res.resultItem.value.isAdmin ? "admin" : "guest");
       }
       navigate("/home");
     });

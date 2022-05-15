@@ -146,7 +146,7 @@ function ToolManagementPage() {
           <Breadcrumb.Item>Admin</Breadcrumb.Item>
           <Breadcrumb.Item>Tools Management</Breadcrumb.Item>
         </Breadcrumb>
-        <Content style={{ background: "#fff" }}>
+        <Content style={{ background: "#fff", paddingBottom: "100px" }}>
           <div id="button-div-container">
             <Button onClick={openCreateForm}>Add</Button>
           </div>

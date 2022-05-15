@@ -37,7 +37,12 @@ const AdminManagePage = () => {
     <>
       <Layout>
         <Sider width={200}>
-          <Menu items={menuItems} style={{ height: "100%" }} />
+          <Menu
+            items={menuItems}
+            mode="inline"
+            theme="dark"
+            inlineCollapsed={false}
+          />
         </Sider>
         <Routes>
           <Route path="/" element={<Navigate to="/admin/tool-management" />} />
