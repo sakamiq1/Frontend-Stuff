@@ -1,28 +1,22 @@
-import DefaultLayout from "./Components/Layout/WebLayout/index";
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
-import { LogIn } from "./Components/Layout/LogInAndSignUp";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import DefaultLayout from "./Components/Layout/WebLayout/WebLayout";
+import ScrollToTop from "./Components/Layout/ScrollToTop";
+import LogIn from "./Components/ClientPages/LogInAndSignUp/login";
+import SignUp from "./Components/ClientPages/LogInAndSignUp/signup";
 
-function App() {
-  const currentUser = localStorage.getItem("Token");
+const App = () => {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route end path="/*" element={<DefaultLayout />} />
-          <Route
-            end
-            path="/login"
-            element={!currentUser ? <LogIn /> : <Navigate to="/home" />}
-          />
+          <Route end path="/login" element={<LogIn />} />
+          <Route end path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
     </>
   );
-}
+};
 
 export default App;

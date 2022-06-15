@@ -1,4 +1,5 @@
-import { Layout, Menu, Breadcrumb, Image, Button } from "antd";
+import { Layout, Menu, Breadcrumb, Image } from "antd";
+import jwtDecode from "jwt-decode";
 import { NavLink } from "react-router-dom";
 
 const { Sider, Content } = Layout;
@@ -8,7 +9,7 @@ const UserInformationPage = () => {
     {
       key: "list-tools",
       label: (
-        <NavLink to="/user-detail" className="navbar-link">
+        <NavLink to="/user" className="navbar-link">
           User information
         </NavLink>
       ),
@@ -16,31 +17,30 @@ const UserInformationPage = () => {
     {
       key: "list-keys",
       label: (
-        <NavLink to="/user-detail" className="navbar-link">
+        <NavLink to="/history" className="navbar-link">
           Order history
         </NavLink>
       ),
     },
   ];
 
+  const user = jwtDecode(localStorage.getItem("Token"));
+  console.log(user);
+
   return (
     <>
-      <Layout style={{ height: "100%" }}>
+      <Layout>
         <Sider width={200}>
-          <Menu
-            items={menuItems}
-            mode="inline"
-            theme="dark"
-          />
+          <Menu items={menuItems} mode="inline" theme="dark" />
         </Sider>
-        <Layout style={{ padding: "0 24px 24px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
+        <Layout>
+          <Breadcrumb>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>user infomation</Breadcrumb.Item>
           </Breadcrumb>
-          <Content style={{ background: "#fff", paddingBottom: "150px" }}>
-            <p>User information go hear</p>
-            <Image src="/Pictures/sample4.jpg" width={300} height={200} />
+          <Content>
+            <div className="user-informatio-container">im here</div>
+            <Image src="/Pictures/sample4.jpg" width={200} height={200} />
           </Content>
         </Layout>
       </Layout>

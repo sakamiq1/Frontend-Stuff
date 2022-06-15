@@ -1,0 +1,53 @@
+.banner-div {
+  position: relative;
+  display: grid;
+  place-items: center;
+  * {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    color: white;
+    font-weight: bold;
+  }
+  .main-sample-img {
+    max-width: 100%;
+    min-height: 20rem;
+  }
+  .left-sample-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .right-sample-img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  .greeting-div {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    gap: 1em;
+    h1 {
+      font-size: 40px;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+.tool-list-div {
+  margin: 80px 100px 50px;
+  .tool-list-title {
+    font-size: 35px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  hr {
+    width: 20%;
+    height: 4px;
+    border: none;
+    background-color: #212121;
+  }
+}
