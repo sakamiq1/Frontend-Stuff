@@ -1,5 +1,5 @@
 import "./homepage.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchToolsAsync, getTools } from "../../../features/tools/toolSlice";
 import ProductCard from "../../ProductCard/ProductCard";
@@ -22,9 +22,9 @@ const HomePage = () => {
     <div>
       <div className="home-page-div">
         <div className="banner-div">
-          <img src="/Pictures/sample2.jpg" className="main-sample-img" />
-          <img src="/Pictures/sample5.png" className="left-sample-img" />
-          <img src="/Pictures/sample6.png" className="right-sample-img" />
+          <img src="/Pictures/sample2.jpg" alt='banner-img' className="main-sample-img" />
+          <img src="/Pictures/sample5.png" alt='banner-img' className="left-sample-img" />
+          <img src="/Pictures/sample6.png" alt='banner-img' className="right-sample-img" />
           <div className="greeting-div">
             <img src="/Pictures/616430.png" alt="cat icon tool online" />
             <h1 className="greeting-tag">Welcome to Tool Online shop</h1>
@@ -44,7 +44,7 @@ const HomePage = () => {
           <div className="widget-wrap">
             <div className="widget-item">
               <div className="facebook-img-link">
-                <a href="https://www.facebook.com/" target="_blank">
+                <a href="https://www.facebook.com/">
                   <img src="/Pictures/Page.png" alt="facebook-img" />
                 </a>
               </div>
@@ -54,7 +54,7 @@ const HomePage = () => {
             </div>
             <div className="widget-item">
               <div className="youtube-img-link">
-                <a href="https://www.youtube.com/" target="_blank">
+                <a href="https://www.youtube.com/">
                   <img src="/Pictures/Youtube-1.png" alt="Youtube-img" />
                 </a>
               </div>
@@ -64,7 +64,7 @@ const HomePage = () => {
             </div>
             <div className="widget-item">
               <div className="group-img-link">
-                <a href="https://www.facebook.com/" target="_blank">
+                <a href="https://www.facebook.com/">
                   <img src="/Pictures/Group-1.png" alt="Group-img" />
                 </a>
               </div>

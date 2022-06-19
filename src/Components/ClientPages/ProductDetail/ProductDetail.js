@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Breadcrumb, Button, Checkbox, Radio, Space } from "antd";
+import {
+  Breadcrumb,
+  Button,
+  Checkbox,
+  Modal,
+  Radio,
+  Space,
+  Typography,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchDetailAsync,
@@ -15,11 +23,35 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 
+const { Text } = Typography;
+
 const Product = () => {
   const toolDetail = useSelector(getDetail);
   const [detail, setDetail] = useState({});
+  const [period, setPeriod] = useState(1);
+  const [visible, setVisible] = useState(false);
+  const [orderStatus, setOrderStatus] = useState("idle");
   const dispatch = useDispatch();
   let param = useParams();
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+  
+  const handleOk = () => {
+      if(orderStatus === 'success'){
+        setOrderStatus("idle")
+         setVisible(false)
+      }else{
+        setOrderStatus("success")
+      }
+  };
+
+  const handleBuy = () => {
+    setVisible(true);
+    console.log(detail);
+    console.log(period);
+  };
 
   useEffect(() => {
     if (param.toolId && param.toolId !== "") {
@@ -28,7 +60,7 @@ const Product = () => {
     return () => {
       dispatch(removeSelectedTools());
     };
-  }, [dispatch]);
+  }, [dispatch, param.toolId]);
 
   useEffect(() => {
     setDetail(toolDetail);
@@ -75,7 +107,11 @@ const Product = () => {
                 <p id="description">{detail.data.description}</p>
               </div>
               <div className="detail-function-wrapper">
-                <Radio.Group optionType="button">
+                <Radio.Group
+                  optionType="button"
+                  onChange={(e) => setPeriod(e.target.value)}
+                  value={period}
+                >
                   <Space size="small">
                     <Radio value={1}>1 Month</Radio>
                     <Radio value={2}>2 Months</Radio>
@@ -85,21 +121,36 @@ const Product = () => {
                 <Checkbox id="shipping-check">
                   Check if you need shipping
                 </Checkbox>
-                <Button id="buy-button">Buy now</Button>
+                <Button id="buy-button" onClick={handleBuy}>
+                  Buy now
+                </Button>
               </div>
               <div className="detail-share-product">
-                <a href="#">
+                <a href="https://www.facebook.com/">
                   <FacebookOutlined />
                 </a>
-                <a href="#">
+                <a href="https://www.google.com/">
                   <GoogleOutlined />
                 </a>
-                <a href="#">
+                <a href="https://twitter.com/home?lang=vi">
                   <TwitterOutlined />
                 </a>
               </div>
             </div>
           </div>
+          <Modal visible={visible} onOk={handleOk} onCancel={handleCancel}>
+            {orderStatus === "idle" ? (
+              <>
+                <Text type="success">Your order</Text>
+                <p>{detail.data.name}</p>
+                <p>{detail.data.code}</p>
+                <p>{detail.data.description}</p>
+                <p>{detail.data.price}</p>
+              </>
+            ) : (
+              "You have submit"
+            )}
+          </Modal>
         </>
       ) : (
         <ErrorPage />

@@ -10,8 +10,9 @@ export const logIn = createAsyncThunk("user/log_in", async (input) => {
 });
 
 export const signUp = createAsyncThunk("user/sign_up", async (input) => {
+  console.log(input);
   const response = await userApi
-    .post("dang-ki", input)
+    .post("dang-ki", { IsAdmin: false, ...input, IsDeleted: false })
     .catch((err) => console.log(err));
   return response.data;
 });
@@ -46,6 +47,9 @@ const user_slice = createSlice({
       payload.isSuccess
         ? message.success("register successful")
         : message.error(payload.message);
+    },
+    [signUp.rejected]: (state, { payload }) => {
+      console.log(payload);
     },
     [logOut.fulfilled]: (state, { payload }) => {
       return { user: {} };
