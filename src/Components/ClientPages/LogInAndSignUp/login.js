@@ -4,8 +4,10 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { logIn, getLoginStatus } from "../../../features/user/userSlice";
 import "./index.scss";
+import { useTranslation } from "react-i18next";
 
 const LogIn = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logInStatus = useSelector(getLoginStatus);
@@ -22,11 +24,8 @@ const LogIn = () => {
 
   const LogInForm = () => (
     <div className="log-in-container">
-      <h1>Log in</h1>
-      <Form
-        name="log in"
-        onFinish={handleSubmit}
-      >
+      <h1>{t('login-header')}</h1>
+      <Form name="log in" onFinish={handleSubmit}>
         <Form.Item
           name="username"
           rules={[
@@ -36,7 +35,7 @@ const LogIn = () => {
             },
           ]}
         >
-          <Input placeholder="username" />
+          <Input placeholder={t('username-label')} />
         </Form.Item>
         <Form.Item
           name="password"
@@ -48,15 +47,15 @@ const LogIn = () => {
             },
           ]}
         >
-          <Input.Password placeholder="password" />
+          <Input.Password placeholder={t('password-label')} />
         </Form.Item>
         <Form.Item>
           <div className="submit-form-item">
             <Link to="/signup" className="change-form">
-              register account
+              {t('register-account')}
             </Link>
             <Button type="primary" htmlType="submit">
-              Log In
+              {t('login-submit')}
             </Button>
           </div>
         </Form.Item>

@@ -22,10 +22,13 @@ import {
   GoogleOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 
 const Product = () => {
+  const { t } = useTranslation();
+
   const toolDetail = useSelector(getDetail);
   const [detail, setDetail] = useState({});
   const [period, setPeriod] = useState(1);
@@ -37,14 +40,14 @@ const Product = () => {
   const handleCancel = () => {
     setVisible(false);
   };
-  
+
   const handleOk = () => {
-      if(orderStatus === 'success'){
-        setOrderStatus("idle")
-         setVisible(false)
-      }else{
-        setOrderStatus("success")
-      }
+    if (orderStatus === "success") {
+      setOrderStatus("idle");
+      setVisible(false);
+    } else {
+      setOrderStatus("success");
+    }
   };
 
   const handleBuy = () => {
@@ -96,10 +99,10 @@ const Product = () => {
                   <span id="separator">|</span>
                   <h3 id="detail-status">
                     {detail.data.status === 2
-                      ? "Actived"
+                      ? t('actived')
                       : detail.data.status === 1
-                      ? "Disabled"
-                      : "Deleted"}
+                      ? t('disabled')
+                      : t('deleted')}
                   </h3>
                 </div>
               </div>
@@ -113,16 +116,16 @@ const Product = () => {
                   value={period}
                 >
                   <Space size="small">
-                    <Radio value={1}>1 Month</Radio>
-                    <Radio value={2}>2 Months</Radio>
-                    <Radio value={3}>3 Months</Radio>
+                    <Radio value={1}>{t('1month')}</Radio>
+                    <Radio value={2}>{t('2month')} </Radio>
+                    <Radio value={3}>{t('3month')}</Radio>
                   </Space>
                 </Radio.Group>
                 <Checkbox id="shipping-check">
-                  Check if you need shipping
+                  {t('shipping-check')}
                 </Checkbox>
                 <Button id="buy-button" onClick={handleBuy}>
-                  Buy now
+                  {t('buynow')}
                 </Button>
               </div>
               <div className="detail-share-product">
@@ -141,14 +144,14 @@ const Product = () => {
           <Modal visible={visible} onOk={handleOk} onCancel={handleCancel}>
             {orderStatus === "idle" ? (
               <>
-                <Text type="success">Your order</Text>
+                <Text type="success">{t('your-order')}</Text>
                 <p>{detail.data.name}</p>
                 <p>{detail.data.code}</p>
                 <p>{detail.data.description}</p>
                 <p>{detail.data.price}</p>
               </>
             ) : (
-              "You have submit"
+              t('submited-order')
             )}
           </Modal>
         </>

@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchToolsAsync, getTools } from "../../../features/tools/toolSlice";
 import ProductCard from "../../ProductCard/ProductCard";
 import { Carousel } from "antd";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
+  const { t } = useTranslation();
   const listTools = useSelector(getTools);
   const dispatch = useDispatch();
   const settings = {
@@ -22,12 +24,24 @@ const HomePage = () => {
     <div>
       <div className="home-page-div">
         <div className="banner-div">
-          <img src="/Pictures/sample2.jpg" alt='banner-img' className="main-sample-img" />
-          <img src="/Pictures/sample5.png" alt='banner-img' className="left-sample-img" />
-          <img src="/Pictures/sample6.png" alt='banner-img' className="right-sample-img" />
+          <img
+            src="/Pictures/sample2.jpg"
+            alt="banner-img"
+            className="main-sample-img"
+          />
+          <img
+            src="/Pictures/sample5.png"
+            alt="banner-img"
+            className="left-sample-img"
+          />
+          <img
+            src="/Pictures/sample6.png"
+            alt="banner-img"
+            className="right-sample-img"
+          />
           <div className="greeting-div">
             <img src="/Pictures/616430.png" alt="cat icon tool online" />
-            <h1 className="greeting-tag">Welcome to Tool Online shop</h1>
+            <h1 className="greeting-tag">{t('greeting-banner')}</h1>
           </div>
         </div>
         <div className="media-scroller-wrapper">
@@ -39,7 +53,7 @@ const HomePage = () => {
           </Carousel>
         </div>
         <div className="contact-div">
-          <h1>liên kết với chúng tôi</h1>
+          <h1>{t('contact-throught')}</h1>
           <hr />
           <div className="widget-wrap">
             <div className="widget-item">

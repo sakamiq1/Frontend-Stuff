@@ -1,6 +1,6 @@
 #headerId {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   background-color: #fff;
   position: absolute;
@@ -11,6 +11,10 @@
   img {
     width: auto;
     height: 5em;
+  }
+  #logo-nav {
+    position: absolute;
+    left: 40px;
   }
 }
 

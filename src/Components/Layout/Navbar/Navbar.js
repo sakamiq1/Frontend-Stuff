@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../features/user/userSlice";
 import "./Navbar.scss";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
+
   const [loginStt, setLoginStt] = useState(
     localStorage.getItem("User") && true
   );
@@ -40,7 +43,7 @@ const Navbar = () => {
       key: "/",
       label: (
         <NavLink exact to="/" className="navbar-link">
-          Trang chủ
+          {t("home")}
         </NavLink>
       ),
     },
@@ -48,7 +51,7 @@ const Navbar = () => {
       key: "/tool",
       label: (
         <NavLink exact to="/tool" className="navbar-link">
-          Sản phẩm
+          {t("product")}
         </NavLink>
       ),
     },
@@ -56,7 +59,7 @@ const Navbar = () => {
       key: "/admin",
       label: (
         <NavLink exact to="/admin" className="navbar-link">
-          Admin
+          {t("admin")}
         </NavLink>
       ),
     },
@@ -77,26 +80,26 @@ const Navbar = () => {
         </>
       ) : (
         <NavLink exact to="/login" className="navbar-link">
-          Sign In
+          {t("signin")}
         </NavLink>
       ),
       children: loginStt && [
         {
           label: (
             <NavLink exact to="/user" className="navbar-link">
-              User info
+              {t("userinfo")}
             </NavLink>
           ),
           key: `${userName}-info`,
         },
-        { label: "History", key: `${userName}-history` },
-        { label: <a onClick={logout}>LogOut</a>, key: "logOut" },
+        { label: t("history"), key: `${userName}-history` },
+        { label: <a onClick={logout}>{t("logout")}</a>, key: "logOut" },
       ],
     },
   ];
 
   return (
-    <div className="navbar-div">
+    <div className="navbar-div" style={{ displat: "flex" }}>
       <Menu
         mode="horizontal"
         items={items}

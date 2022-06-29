@@ -1,10 +1,12 @@
 import { Form, Input, Button } from "antd";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { signUp } from "../../../features/user/userSlice";
 import "./index.scss";
 
 const SignUp = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const RegisterForm = () => (
@@ -20,7 +22,7 @@ const SignUp = () => {
             },
           ]}
         >
-          <Input placeholder="Username" />
+          <Input placeholder={t('username-label')} />
         </Form.Item>
         <Form.Item
           name="password"
@@ -31,7 +33,7 @@ const SignUp = () => {
             },
           ]}
         >
-          <Input.Password placeholder="Password" />
+          <Input.Password placeholder={t('password-label')} />
         </Form.Item>
         <Form.Item
           name="phone"
@@ -45,15 +47,15 @@ const SignUp = () => {
             },
           ]}
         >
-          <Input placeholder="Phone number" />
+          <Input placeholder={t('phonenumber-label')} />
         </Form.Item>
         <Form.Item>
           <div className="submit-form-item">
             <Link to="/login" className="change-form">
-              already have account
+              {t('login-account')}
             </Link>
             <Button type="primary" htmlType="submit">
-              Sign Up
+              {t('register-submit')}
             </Button>
           </div>
         </Form.Item>

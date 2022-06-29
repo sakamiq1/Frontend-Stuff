@@ -25,8 +25,11 @@ import {
   Breadcrumb,
   Button,
 } from "antd";
+import { useTranslation } from "react-i18next";
 
 const ToolTable = () => {
+  const { t } = useTranslation();
+
   const [visible, setVisible] = useState(false);
   const [editTool, setEditTool] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -36,26 +39,26 @@ const ToolTable = () => {
 
   const columns = [
     { key: "id", dataIndex: "id", title: "Id", width: "10%" },
-    { key: "name", dataIndex: "name", title: "Name" },
-    { key: "code", dataIndex: "code", title: "Code", width: "15%" },
-    { key: "price", dataIndex: "price", title: "Price", width: "15%" },
+    { key: "name", dataIndex: "name", title: t('name-col') },
+    { key: "code", dataIndex: "code", title: t('code-col'), width: "15%" },
+    { key: "price", dataIndex: "price", title: t('price-col'), width: "15%" },
     {
       key: "status",
       dataIndex: "status",
-      title: "Status",
+      title: t('status-col'),
       width: "15%",
       render: (_, record) => {
         return record.status === 2 ? (
           <Tag key="active" color="green">
-            Active
+            {t('actived')}
           </Tag>
         ) : record.status === 1 ? (
           <Tag key="disable" color="red">
-            Disable
+            {t('disabled')}
           </Tag>
         ) : (
           <Tag key="delete" color="gray">
-            Delete
+            {t('deleted')}
           </Tag>
         );
       },
@@ -139,11 +142,11 @@ const ToolTable = () => {
           margin: "20px 40px 20px auto",
         }}
       >
-        <Button onClick={openCreateForm}>Create Tool</Button>
+        <Button onClick={openCreateForm}>{t('addtool')}</Button>
       </div>
       <Table
         columns={columns}
-        dataSource={listTool && listTool.results }
+        dataSource={listTool && listTool.results}
         style={{ margin: "20px 40px auto" }}
         loading={{
           indicator: (

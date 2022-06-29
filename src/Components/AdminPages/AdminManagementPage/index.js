@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ToolTable from "./ToolTable";
 import OrderTable from "./OrderTable";
+import { t } from "i18next";
 
 const { Sider, Content } = Layout;
 
@@ -16,7 +17,7 @@ const AdminManagePage = () => {
       key: "list-tools",
       label: (
         <a onClick={() => setAnchor("tool")} className="navbar-link">
-          List Tools
+          {t('list-tool')}
         </a>
       ),
     },
@@ -24,7 +25,7 @@ const AdminManagePage = () => {
       key: "list-keys",
       label: (
         <a onClick={() => setAnchor("key")} className="navbar-link">
-          List Keys
+          {t('list-key')}
         </a>
       ),
     },
@@ -32,7 +33,7 @@ const AdminManagePage = () => {
       key: "list-users",
       label: (
         <a onClick={() => setAnchor("user")} className="navbar-link">
-          List Users
+          {t('list-user')}
         </a>
       ),
     },
@@ -40,7 +41,7 @@ const AdminManagePage = () => {
       key: "list-orders",
       label: (
         <a onClick={() => setAnchor("order")} className="navbar-link">
-          List Orders
+          {t('list-order')}
         </a>
       ),
     },

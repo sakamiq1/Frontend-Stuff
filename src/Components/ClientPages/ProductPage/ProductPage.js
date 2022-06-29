@@ -8,8 +8,10 @@ import {
 import { getTools } from "../../../features/tools/toolSlice";
 import "./ProductPage.scss";
 import ProductCard from "../../ProductCard/ProductCard";
+import { useTranslation } from "react-i18next";
 
 const ProductPage = () => {
+  const { t } = useTranslation();
   const listTool = useSelector(getTools);
   const dispatch = useDispatch();
 
@@ -30,11 +32,11 @@ const ProductPage = () => {
         <img src="/Pictures/sample6.png" alt="" className="right-sample-img" />
         <div className="greeting-div">
           <img src="/Pictures/616430.png" alt="cat icon tool online" />
-          <h1 className="greeting-tag">You need some tools ?</h1>
+          <h1 className="greeting-tag">{t('product-banner')}</h1>
         </div>
       </div>
       <div className="tool-list-div">
-        <h1 className="tool-list-title">our products</h1>
+        <h1 className="tool-list-title">{t('product-adver')}</h1>
         <hr />
         {listTool && (
           <List
