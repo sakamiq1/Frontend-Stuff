@@ -39,26 +39,30 @@ const ToolTable = () => {
 
   const columns = [
     { key: "id", dataIndex: "id", title: "Id", width: "10%" },
-    { key: "name", dataIndex: "name", title: t('name-col') },
-    { key: "code", dataIndex: "code", title: t('code-col'), width: "15%" },
-    { key: "price", dataIndex: "price", title: t('price-col'), width: "15%" },
+    { key: "name", dataIndex: "name", title: t("name-col") },
+    { key: "code", dataIndex: "code", title: t("code-col"), width: "15%" },
+    { key: "price", dataIndex: "price", title: t("price-col"), width: "15%" },
     {
       key: "status",
       dataIndex: "status",
-      title: t('status-col'),
+      title: t("status-col"),
       width: "15%",
       render: (_, record) => {
-        return record.status === 2 ? (
+        return record.status === 1 ? (
           <Tag key="active" color="green">
-            {t('actived')}
+            {t("actived")}
           </Tag>
-        ) : record.status === 1 ? (
+        ) : record.status === -1 ? (
           <Tag key="disable" color="red">
-            {t('disabled')}
+            {t("disabled")}
+          </Tag>
+        ) : record.status === 0 ? (
+          <Tag key="disable" color="blue">
+            {t("pending")}
           </Tag>
         ) : (
           <Tag key="delete" color="gray">
-            {t('deleted')}
+            {t("deleted")}
           </Tag>
         );
       },
@@ -70,10 +74,9 @@ const ToolTable = () => {
       render: (record) => (
         <Space size="middle">
           <a onClick={() => openEditForm(record.id)}>Edit</a>
-
           <Popconfirm
             title="Are you sure to delete this tool?"
-            onConfirm={() => dispatch(deleteToolAsync(record.id))}
+            onConfirm={() => dispatch(deleteToolAsync({ id: record.id }))}
             okText="Yes"
             cancelText="No"
           >
@@ -142,7 +145,7 @@ const ToolTable = () => {
           margin: "20px 40px 20px auto",
         }}
       >
-        <Button onClick={openCreateForm}>{t('addtool')}</Button>
+        <Button onClick={openCreateForm}>{t("addtool")}</Button>
       </div>
       <Table
         columns={columns}
@@ -201,9 +204,10 @@ const ToolTable = () => {
           </Form.Item>
           <Form.Item label="Status" name="status">
             <Radio.Group>
-              <Radio value={2}>Active</Radio>
-              <Radio value={1}>Disable</Radio>
-              <Radio value={0}>Delete</Radio>
+              <Radio value={1}>Active</Radio>
+              <Radio value={-1}>Disable</Radio>
+              <Radio value={-2}>Delete</Radio>
+              <Radio value={0}>Pending</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item>

@@ -1,51 +1,58 @@
-import { Layout, Menu, Breadcrumb, Image } from "antd";
-import jwtDecode from "jwt-decode";
-import { NavLink } from "react-router-dom";
+import { Layout, Menu, Breadcrumb } from 'antd'
+import { useState } from 'react'
+import HistoryPage from '../History/HistoryPage'
+import UserInformation from '../UserInformation/UserInformation'
 
-const { Sider, Content } = Layout;
+const { Sider, Content } = Layout
 
-const UserInformationPage = () => {
+const UserInformationPage = ({ anchorTag }) => {
+  const [anchor, setAnchor] = useState(!anchorTag ? 'information' : anchorTag)
+
   const menuItems = [
     {
-      key: "list-tools",
-      label: (
-        <NavLink to="/user" className="navbar-link">
-          User information
-        </NavLink>
-      ),
+      key: 'information',
+      label: 'User information',
     },
     {
-      key: "list-keys",
-      label: (
-        <NavLink to="/history" className="navbar-link">
-          Order history
-        </NavLink>
-      ),
+      key: 'history',
+      label: 'Order history',
     },
-  ];
+  ]
 
-  const user = jwtDecode(localStorage.getItem("Token"));
-  console.log(user);
+  const handleChangeAnchor = (e) => {
+    setAnchor(e.key)
+  }
 
   return (
     <>
       <Layout>
         <Sider width={200}>
-          <Menu items={menuItems} mode="inline" theme="dark" />
+          <Menu
+            items={menuItems}
+            mode="inline"
+            theme="dark"
+            defaultSelectedKeys={[anchor]}
+            onClick={handleChangeAnchor}
+          />
         </Sider>
         <Layout>
-          <Breadcrumb>
+          <Breadcrumb
+            style={{
+              margin: '16px 20px',
+            }}
+          >
             <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>user infomation</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              {anchor === 'information' ? 'user infomation' : 'order history'}
+            </Breadcrumb.Item>
           </Breadcrumb>
           <Content>
-            <div className="user-informatio-container">im here</div>
-            <Image src="/Pictures/sample4.jpg" width={200} height={200} />
+            {anchor === 'information' ? <UserInformation /> : <HistoryPage />}
           </Content>
         </Layout>
       </Layout>
     </>
-  );
-};
+  )
+}
 
-export default UserInformationPage;
+export default UserInformationPage

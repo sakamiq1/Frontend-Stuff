@@ -13,7 +13,9 @@ export const fetchToolsAsync = createAsyncThunk(
 
 export const addToolAsync = createAsyncThunk("tools/addTool", async (data) => {
   const response = await toolApi
-    .post("/them-tool", data)
+    .post("/them-tool", data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+    })
     .catch((err) => console.log(err));
   return response.data;
 });
@@ -22,9 +24,11 @@ export const editToolAsync = createAsyncThunk(
   "tools/editTool",
   async (data) => {
     const response = await toolApi
-      .put(`sua-tool`, data)
+      .put(`sua-tool`, data, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+      })
       .catch((err) => console.log(err));
-    return response.data;
+    return response;
   }
 );
 
@@ -32,7 +36,9 @@ export const deleteToolAsync = createAsyncThunk(
   "tools/deleteTool",
   async (id) => {
     const response = await toolApi
-      .delete(`xoa-tool?id=${id}`)
+      .put(`xoa-tool`, id, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` },
+      })
       .catch((err) => console.log(err));
     return response.data;
   }
@@ -60,29 +66,30 @@ const tool_slice = createSlice({
       return {
         tools: {
           ...state.tools,
-          results: state.tools.results.concat(payload.data),
+          results: state.tools.results.concat(payload.resultItem),
         },
       };
     },
     [editToolAsync.fulfilled]: (state, { payload }) => {
       console.log("full filled...");
-      console.log(payload.data);
       return {
         tools: {
           ...state.tools,
           results: state.tools.results.map((tool) =>
-            payload.data.id === tool.id ? payload.data : tool
+            payload.data.resultItem.id === tool.id
+              ? payload.data.resultItem
+              : tool
           ),
         },
       };
     },
-    [deleteToolAsync.fulfilled]: (state, { payload }) => {
+    [deleteToolAsync.fulfilled]: (state, action) => {
       console.log("full filled...");
       return {
         tools: {
           ...state.tools,
-          results: state.tools.results.filter(
-            (item) => item.id !== payload.data.id
+          results: state.tools.results.map((item) =>
+            item.id === action.meta.arg.id ? { ...item, status: -2 } : item
           ),
         },
       };

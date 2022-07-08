@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import {
   Breadcrumb,
   Button,
@@ -8,73 +8,95 @@ import {
   Radio,
   Space,
   Typography,
-} from "antd";
-import { useDispatch, useSelector } from "react-redux";
+  Spin,
+} from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchDetailAsync,
   getDetail,
   removeSelectedTools,
-} from "../../../features/details/detailSlice";
-import "./ProductDetail.scss";
-import ErrorPage from "../ErrorPage";
+} from '../../../features/details/detailSlice'
+import './ProductDetail.scss'
 import {
   FacebookOutlined,
   GoogleOutlined,
   TwitterOutlined,
-} from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
+} from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import {
+  addNewOrder,
+  getOrderStatus,
+} from '../../../features/orders/orderSlice'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 const Product = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
+  const navigate = useNavigate()
 
-  const toolDetail = useSelector(getDetail);
-  const [detail, setDetail] = useState({});
-  const [period, setPeriod] = useState(1);
-  const [visible, setVisible] = useState(false);
-  const [orderStatus, setOrderStatus] = useState("idle");
-  const dispatch = useDispatch();
-  let param = useParams();
+  const toolDetail = useSelector(getDetail)
+  const [detail, setDetail] = useState({})
+  const [period, setPeriod] = useState(1)
+  const [visible, setVisible] = useState(false)
+  const [orderStatus, setOrderStatus] = useState('idle')
+  const buyStatus = useSelector(getOrderStatus)
+  const dispatch = useDispatch()
+  let param = useParams()
 
   const handleCancel = () => {
-    setVisible(false);
-  };
+    setVisible(false)
+  }
 
   const handleOk = () => {
-    if (orderStatus === "success") {
-      setOrderStatus("idle");
-      setVisible(false);
+    if (orderStatus === 'success') {
+      setOrderStatus('idle')
+      setVisible(false)
     } else {
-      setOrderStatus("success");
+      dispatch(
+        addNewOrder({
+          Username: localStorage.getItem('User'),
+          Tools: [
+            {
+              ToolId: Number(param.toolId),
+              NumberOfKeys: period,
+              Discount: 0,
+              MachineId: 'cc00f1dc-fceb-42e0-8217-3ee6e4b73ab9',
+            },
+          ],
+        }),
+      )
+      setOrderStatus('pending')
     }
-  };
+  }
 
   const handleBuy = () => {
-    setVisible(true);
-    console.log(detail);
-    console.log(period);
-  };
+    localStorage.getItem('User') ? setVisible(true) : navigate('/login')
+  }
 
   useEffect(() => {
-    if (param.toolId && param.toolId !== "") {
-      dispatch(fetchDetailAsync(param.toolId));
+    if (param.toolId && param.toolId !== '') {
+      dispatch(fetchDetailAsync(param.toolId))
     }
     return () => {
-      dispatch(removeSelectedTools());
-    };
-  }, [dispatch, param.toolId]);
+      dispatch(removeSelectedTools())
+    }
+  }, [dispatch, param.toolId])
 
   useEffect(() => {
-    setDetail(toolDetail);
-  }, [toolDetail]);
+    setDetail(toolDetail.resultItem)
+  }, [toolDetail])
+
+  useEffect(() => {
+    buyStatus && setOrderStatus(buyStatus.isSuccess ? 'success' : 'failed')
+  }, [buyStatus])
 
   return (
     <div className="product-detail-div">
-      {detail.data ? (
+      {detail ? (
         <>
           <div className="product-img">
-            <img src={detail.data.image} alt={detail.data.name} />
+            <img src={detail.image} alt={detail.name} />
           </div>
           <div className="product-detail">
             <Breadcrumb>
@@ -82,32 +104,36 @@ const Product = () => {
                 <span className="breadcrumb-detail">Tools</span>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <span className="breadcrumb-detail">{detail.data.name}</span>
+                <span className="breadcrumb-detail">{detail.name}</span>
               </Breadcrumb.Item>
             </Breadcrumb>
             <div className="product-detail-wrapper">
               <div className="detail-title">
-                <h1 id="detail-title">{detail.data.name}</h1>
+                <h1 id="detail-title">{detail.name}</h1>
                 <div className="detail-price">
                   <h3>
-                    {detail.data.price
-                      .toFixed(2)
-                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-                      .replace(".00", "")}{" "}
+                    {detail.price
+                      ? detail.price
+                          .toFixed(2)
+                          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+                          .replace('.00', '')
+                      : '0000.00'}{' '}
                     VND
                   </h3>
                   <span id="separator">|</span>
                   <h3 id="detail-status">
-                    {detail.data.status === 2
+                    {detail.status === 1
                       ? t('actived')
-                      : detail.data.status === 1
+                      : detail.status === -1
                       ? t('disabled')
+                      : detail.status === 0
+                      ? 'pending'
                       : t('deleted')}
                   </h3>
                 </div>
               </div>
               <div className="detail-description">
-                <p id="description">{detail.data.description}</p>
+                <p id="description">{detail.description}</p>
               </div>
               <div className="detail-function-wrapper">
                 <Radio.Group
@@ -121,9 +147,7 @@ const Product = () => {
                     <Radio value={3}>{t('3month')}</Radio>
                   </Space>
                 </Radio.Group>
-                <Checkbox id="shipping-check">
-                  {t('shipping-check')}
-                </Checkbox>
+                <Checkbox id="shipping-check">{t('shipping-check')}</Checkbox>
                 <Button id="buy-button" onClick={handleBuy}>
                   {t('buynow')}
                 </Button>
@@ -142,24 +166,28 @@ const Product = () => {
             </div>
           </div>
           <Modal visible={visible} onOk={handleOk} onCancel={handleCancel}>
-            {orderStatus === "idle" ? (
+            {orderStatus === 'idle' ? (
               <>
                 <Text type="success">{t('your-order')}</Text>
-                <p>{detail.data.name}</p>
-                <p>{detail.data.code}</p>
-                <p>{detail.data.description}</p>
-                <p>{detail.data.price}</p>
+                <p>{detail.name}</p>
+                <p>{detail.code}</p>
+                <p>{detail.description}</p>
+                <p>{detail.price}</p>
               </>
-            ) : (
+            ) : orderStatus === 'success' ? (
               t('submited-order')
+            ) : orderStatus === 'failed' ? (
+              'Order failed'
+            ) : (
+              <Spin />
             )}
           </Modal>
         </>
       ) : (
-        <ErrorPage />
+        <Spin />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

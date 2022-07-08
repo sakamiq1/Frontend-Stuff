@@ -12,6 +12,7 @@ import "./WebLayout.scss";
 import i18n from "../../../translation/i18n";
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
+import HistoryPage from "../../ClientPages/ClientAccountPage/History/HistoryPage";
 
 const { Header, Footer, Content } = Layout;
 const { Option } = Select;
@@ -73,6 +74,11 @@ const DefaultLayout = () => {
                   )
                 }
               />
+              <Route path="/history" element={localStorage.getItem("User") ? (
+                    <UserInformationPage anchorTag='history' />
+                  ) : (
+                    <ErrorPage />
+                  )} />
               <Route path="/404" element={<ErrorPage />} />
             </Routes>
           </Content>

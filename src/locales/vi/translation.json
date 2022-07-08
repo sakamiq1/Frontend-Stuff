@@ -20,7 +20,7 @@
   "shipping-check": "Vận chuyển tận nhà",
   "buynow": "Mua ngay",
   "your-order": "Đơn hàng của bạn",
-  "submited-oreder": "Xác nhận thành công",
+  "submited-order": "Xác nhận thành công",
   "login-header": "Đăng nhập",
   "username-label": "Tài khoản",
   "password-label": "Mật khẩu",
@@ -38,5 +38,10 @@
   "name-col": "Tên",
   "code-col": "Mã",
   "price-col": "Giá",
-  "status-col": "Trạng thái"
+  "status-col": "Trạng thái",
+  "pending": "Đang chờ",
+  "orderDate-col": "Order tạo ngày",
+  "get-full-order": "Xem tất cả order",
+  "get-pending": "Xem order đang chờ",
+  "approve": "Xác nhận"
 }

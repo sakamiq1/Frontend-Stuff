@@ -4,7 +4,7 @@ import toolApi from "../../apis/toolApi";
 export const fetchDetailAsync = createAsyncThunk(
   "details/fetchDetails",
   async (id) => {
-    const response = await toolApi.get(`/chi-tiet?id=${id}`);
+    const response = await toolApi.get(`chi-tiet/${id}`);
     return response.data;
   }
 );

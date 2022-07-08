@@ -20,7 +20,7 @@
   "shipping-check": "Check if you need shipping",
   "buynow": "Buy Now",
   "your-order": "Your Order",
-  "submited-oreder": "You have submited",
+  "submited-order": "You have submited",
   "login-header": "Log In",
   "username-label": "Username",
   "password-label": "Password",
@@ -38,5 +38,10 @@
   "name-col": "Name",
   "code-col": "Code",
   "price-col": "Price",
-  "status-col": "Status"
+  "status-col": "Status",
+  "pending": "Pending",
+  "orderDate-col": "Order CreatedAt",
+  "get-full-order": "Get all order",
+  "get-pending": "Get pending order",
+  "approve": "Approve"
 }
